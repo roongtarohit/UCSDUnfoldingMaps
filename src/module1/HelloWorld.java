@@ -14,6 +14,11 @@ import de.fhpotsdam.unfolding.utils.MapUtils;
   * @author Your name here
   * Date: July 17, 2015
   * */
+
+
+// Other providers - http://unfoldingmaps.org/javadoc/de/fhpotsdam/unfolding/providers/package-summary.html
+
+
 public class HelloWorld extends PApplet
 {
 	/** Your goal: add code to display second map, zoom in, and customize the background.
@@ -32,15 +37,20 @@ public class HelloWorld extends PApplet
 	/** The map we use to display our home town: La Jolla, CA */
 	UnfoldingMap map1;
 	
-	/** The map you will use to display your home town */ 
+	/** The map you will use to display my current location - Arizona*/ 
 	UnfoldingMap map2;
+	
+	/** The map you will use to display your home town - Mumbai */ 
+	UnfoldingMap map3;
 
 	public void setup() {
-		size(800, 600, P2D);  // Set up the Applet window to be 800x600
+		
+		// First parameter is width followed by height
+		size(1300, 600, P2D);  // Set up the Applet window to be 800x600
 		                      // The OPENGL argument indicates to use the 
 		                      // Processing library's 2D drawing
 		                      // You'll learn more about processing in Module 3
-
+			
 		// This sets the background color for the Applet.  
 		// Play around with these numbers and see what happens!
 		this.background(200, 200, 200);
@@ -76,6 +86,21 @@ public class HelloWorld extends PApplet
 		
 		// TODO: Add code here that creates map2 
 		// Then you'll modify draw() below
+		
+		// Will create new Map
+		map2 = new UnfoldingMap(this, 450, 50, 350, 500, provider);
+		// Location - coordinates of latitude and longitude
+		map2.zoomAndPanTo(zoomLevel, new Location(33.4f,-111.9f));
+		// To make my map interactive
+		MapUtils.createDefaultEventDispatcher(this, map2);
+		
+		
+		// Will create new Map
+		map3 = new UnfoldingMap(this, 850, 50, 350, 500, provider);
+		// Location - coordinates of latitude and longitude
+		map3.zoomAndPanTo(zoomLevel, new Location(19.1f,72.8f));
+		// To make my map interactive
+		MapUtils.createDefaultEventDispatcher(this, map3);
 
 	}
 
@@ -84,6 +109,8 @@ public class HelloWorld extends PApplet
 		// So far we only draw map1...
 		// TODO: Add code so that both maps are displayed
 		map1.draw();
+		map2.draw();
+		map3.draw();
 	}
 
 	
